@@ -8,8 +8,9 @@ import { UsersService } from '../users.service';
 export class SignupComponent {
   constructor(private userService: UsersService) {}
   ngOnInit() {
-    this.userService.getAllTours("").subscribe((data) => {
-      console.log(data);
+    let query = '';
+    this.userService.getAllTours(query).subscribe((response) => {
+      console.log(response);
     });
   }
   submitData(value: any) {

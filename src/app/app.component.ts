@@ -9,9 +9,9 @@ export class AppComponent {
   title = 'myfirst-app';
   constructor(private userService: UsersService) {}
   ngOnInit() {
-    this.userService.getAllTours("").subscribe((data) => {
-      console.log(data);
-    });
+    // this.userService.getAllTours("").subscribe((data) => {
+    //   console.log(data);
+    // });
   }
   
   

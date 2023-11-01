@@ -1,0 +1,104 @@
+<body class="flex items-center">
+  <div class="container mx-auto min-h-screen w-1/2 p-8">
+    <h1 class="text-3xl font-bold mb-4">Create a New Tour</h1>
+    <form (submit)="onSubmit($event)" class="space-y-4">
+      <div class="flex flex-col">
+        <label for="imageCover" class="text-gray-600">Tour Cover Image</label>
+        <input
+          type="file"
+          id="imageCover"
+          name="imageCover"
+          (change)="onFileSelected($event)"
+          class="border p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="name" class="text-gray-600">Tour Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="tour.name"
+          required
+          class="border rounded-md p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="maxGroupSize" class="text-gray-600">Tour Max Size Group</label>
+        <input
+          type="text"
+          id="maxGroupSize"
+          name="maxGroupSize"
+          [(ngModel)]="tour.maxGroupSize"
+          required
+          class="border rounded-md p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="difficulty" class="text-gray-600">Tour Difficulty</label>
+        <select
+          id="difficulty"
+          name="difficulty"
+          [(ngModel)]="tour.difficulty"
+          required
+          class="border rounded-md p-2 focus:ring focus:ring-blue-200"
+        >
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="difficult">Difficult</option>
+        </select>
+      </div>
+      <div class="flex flex-col">
+        <label for="summary" class="text-gray-600">Tour Summary</label>
+        <input
+          type="text"
+          id="summary"
+          name="summary"
+          [(ngModel)]="tour.summary"
+          required
+          class="border rounded-md p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="description" class="text-gray-600">Tour Description</label>
+        <textarea
+          id="description"
+          name="description"
+          [(ngModel)]="tour.description"
+          required
+          class="border rounded-md p-2 focus:ring focus:ring-blue-200"
+        ></textarea>
+      </div>
+      <div class="flex flex-col">
+        <label for="price" class="text-gray-600">Price</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          [(ngModel)]="tour.price"
+          required
+          class="border rounded-md p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="duration" class="text-gray-600">Duration (days)</label>
+        <input
+          type="number"
+          id="duration"
+          name="duration"
+          [(ngModel)]="tour.duration"
+          required
+          class="border rounded-md p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+      <button
+        type="submit"
+        class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring focus:ring-blue-200"
+      >
+        Create Tour
+      </button>
+    </form>
+  </div>
+</body>
+<router-outlet></router-outlet>

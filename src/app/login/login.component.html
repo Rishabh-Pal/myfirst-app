@@ -1,16 +1,16 @@
-<p>login works!</p>
+
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96">
         <h1 class="text-2xl font-semibold text-gray-800 mb-6">Login</h1>
-        <form  #addForm ="ngForm" method="post" (ngSubmit)="submitData(addForm.value)">
+        <form  #logForm ="ngForm" method="post" (ngSubmit)="submitData(logForm.value)">
            
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-medium">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200" placeholder="Your Email" required>
+                <input type="email" id="email" name="email"  [(ngModel)]="logForm.value.email" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200" placeholder="Your Email" required>
             </div>
             <div class="mb-6">
                 <label for="password" class="block text-gray-700 text-sm font-medium">Password</label>
-                <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200" placeholder="Password" required>
+                <input type="password" id="password" name="password" [(ngModel)]="logForm.value.password" class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200" placeholder="Password" required>
             </div>
            
             <div class="text-center">
@@ -19,4 +19,4 @@
         </form>
     </div>
 </body>
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->

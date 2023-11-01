@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { TourListComponent } from './tour-list/tour-list.component';
+import { CreateTourComponent } from './create-tour/create-tour.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { SignupComponent } from './signup/signup.component';
     HeaderComponent,
     LoginComponent,
     SignupComponent,
+    TourListComponent,
+    CreateTourComponent,
   ],
   imports: [
     BrowserModule,
