@@ -26,35 +26,14 @@ export class CreateTourComponent {
     //     console.log('Tour created:', response);
     //   }
     // );
-    if (this.tour.imageCover) {
-      const formData = new FormData();
-      formData.append('imageCover', this.tour.imageCover);
-
-      // Upload the image to your server
-      this.userService.uploadImage(formData).subscribe(
-        (imageUploadResponse) => {
-          // Assuming the server returns the image URL in the response
-          this.tour.imageCover = imageUploadResponse.imageURL;
-
-          // Continue with tour creation
-          this.createTour();
-        },
-        (imageUploadError) => {
-          console.error('Error uploading image:', imageUploadError);
-        }
-      );
-    }
+    this.createTour();
   }
 
-  onFileSelected(event: any) {
-    this.tour.imageCover = event.target.files[0];
-  }
 
   createTour() {
     this.userService.createTour(this.tour).subscribe(
       (response) => {
         console.log('Tour created:', response);
-        // Optionally, you can handle the response or navigate to a different page
       }
     );
   }

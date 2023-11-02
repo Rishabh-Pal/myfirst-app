@@ -15,9 +15,6 @@ export class UsersService {
     });
   }
 
-  uploadImage(formData: FormData): Observable<any> {
-    return this.http.post(`${this.baseURL}/uploadImage`, formData);
-  }
 
   getAllTours(query: string): Observable<any> {
     return this.http.get(`${this.baseURL}/tours?${query}`, { headers: this.getHeaders() });

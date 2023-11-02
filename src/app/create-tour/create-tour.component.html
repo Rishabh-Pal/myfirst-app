@@ -5,10 +5,10 @@
       <div class="flex flex-col">
         <label for="imageCover" class="text-gray-600">Tour Cover Image</label>
         <input
-          type="file"
+          type="text"
           id="imageCover"
           name="imageCover"
-          (change)="onFileSelected($event)"
+          [(ngModel)]="tour.imageCover"
           class="border p-2 focus:ring focus:ring-blue-200"
         />
       </div>
