@@ -48,7 +48,7 @@ export class UsersService {
     return this.http.post(`${this.baseURL}/users/login`, data, { headers: this.getHeaders() });
   }
   ForgetPassword(data: any): Observable<any> {
-    return this.http.post(`${this.baseURL}/users/forgotPassword`, data);
+    return this.http.post(this.baseURL+'/users/forgotPassword', data);
   }
   ResetPassword(data: any, id: string): Observable<any> {
     return this.http.patch(`${this.baseURL}/users/resetPassword/${id}`, data);

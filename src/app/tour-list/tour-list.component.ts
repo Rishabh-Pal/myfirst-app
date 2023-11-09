@@ -1,59 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { Tour, TourResponse } from './tour.model';
-import { ActivatedRoute, NavigationEnd, Router  } from '@angular/router';
-import { filter } from 'rxjs/operators';
+
+interface Sort {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-tour-list',
   templateUrl: './tour-list.component.html',
-  styleUrls: ['./tour-list.component.css']
+  styleUrls: ['./tour-list.component.css'],
 })
-export class TourListComponent implements OnInit{
+export class TourListComponent implements OnInit {
   tours: Tour[] = [];
-  query='';
-  constructor(private userService: UsersService, private route: ActivatedRoute, private router: Router) {
-    this.route.queryParams.subscribe((data) => {
-      this.query = this.objectToQueryString(data);
-      this.fetchResults();
-    });
+  sort: Sort[] = [
+    { value: 'duration', viewValue: 'duration' },
+    { value: 'difficulty', viewValue: 'difficulty' },
+    { value: 'price', viewValue: 'price' },
+    { value: 'ratingsAverage', viewValue: 'ratingsAverage' },
+    { value: 'ratingsQuantity', viewValue: 'ratingsQuantity' },
+    { value: 'maxGroupSize', viewValue: 'maxGroupSize' },
+  ];
+  query = '';
+  sortvalue: string = '';
+  searchname: string = '';
+  selectedSort: string = '';
+  constructor(
+    private userService: UsersService,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.selectedSort = '';
+  }
 
-    // Listen to route changes using NavigationEnd event
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this.fetchResults();
-    });
-  }
-  objectToQueryString(obj: any) {
-    const keyValuePairs = [];
-  
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        const value = obj[key];
-        keyValuePairs.push(`${key}=${encodeURIComponent(value)}`);
-      }
-    }
-  
-    return keyValuePairs.join('&');
-  }
-  
   private fetchResults() {
-    this.userService.getAllTours(this.query).subscribe((response: TourResponse) => {
-      if (response.status === 'success' && response.data.tours && localStorage.getItem('accessToken')) {
-        this.tours = response.data.tours;
-      } else {
-        console.error('Error in API response');
-      }
-    });
+    this.query = `sort=${this.selectedSort}`;
+    console.log('Fetching with Query:', this.query);
+    this.userService
+      .getAllTours(this.query)
+      .subscribe((response: TourResponse) => {
+        console.log('API Response:', response);
+        if (
+          response.status === 'success' &&
+          response.data.tours &&
+          localStorage.getItem('accessToken')
+        ) {
+          this.tours = response.data.tours;
+        } else {
+          console.error('Error in API response');
+        }
+      });
   }
-
   ngOnInit() {
     this.fetchResults();
   }
-  searchWithQuery() {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { sort: this.query },
-      queryParamsHandling: 'merge'
-    });
+  onSortChange() {
+    this.query = `sort=${this.selectedSort}`;
+    this.fetchResults();
+  }
+  Search() {
+    if (!this.searchname) {
+      this.ngOnInit(); 
+    } else {
+      this.tours = this.tours.filter((tour) => {
+        const name = tour.name ? tour.name.toLowerCase() : '';
+        if(name.includes(this.searchname.toLowerCase()) ){
+          return name.includes(this.searchname.toLowerCase());
+        }else{
+          return ;
+        };
+      });
+    }
   }
 }

@@ -1,6 +1,7 @@
 export interface Tour {
+    searchname: any;
     _id: string;
-    name: string;
+    name: any;
     duration: number;
     maxGroupSize: number;
     difficulty: string;

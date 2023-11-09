@@ -1,8 +1,29 @@
 <div *ngIf="tours.length > 0" class="bg-slate-400">
   <h1 class="text-3xl font-bold text-white text-center p-4">Tour List</h1>
-  <div class="flex justify-end mr-10">
-    <input type="text" [(ngModel)]="query" />
-    <button (click)="searchWithQuery()">Search</button>
+
+  <div class="search-field">
+    <!-- <h4>Sort</h4> -->
+    <mat-form-field>
+      <mat-label>Sort by</mat-label>
+      <mat-select [(ngModel)]="selectedSort" (ngModelChange)="onSortChange()">
+        <mat-option *ngFor="let sort of sort" [value]="sort.value">
+          {{ sort.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- <mat-form-field class="example-full-width">
+      <mat-label>Filter</mat-label>
+      <input matInput placeholder="Ex. Pizza" />
+    </mat-form-field> -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        [(ngModel)]="searchname"
+        name="searchname"
+        (ngModelChange)="Search()"
+      />
+    </mat-form-field>
   </div>
   <ul class="mx-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
     <li *ngFor="let tour of tours">
